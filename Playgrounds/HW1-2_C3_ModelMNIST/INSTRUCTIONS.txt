@@ -1,0 +1,21 @@
+Run the following once the Flask app is working adequately.
+
+```TERMINAL
+docker build -t flask_keras_docker:latest .
+
+docker run -d -p 8000:8000 flask_keras_docker
+```
+
+How to push to DockerHub
+
+```TERMINAL
+docker login
+docker push 88696316/flask_keras:latest
+```
+
+How to pull from DockerHub
+
+```TERMINAL
+docker pull 88696316/flask_keras
+docker run -p 8000:8000 88696316/flask_keras
+```
