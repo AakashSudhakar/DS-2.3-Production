@@ -1,7 +1,0 @@
-data/dataset-master/
-data/dataset2-master/
-data/yolo_weights*
-.ipynb_checkpoints/
-
-# data is too large
-data/dataset2-master.zip
