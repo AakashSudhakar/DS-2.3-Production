@@ -10,21 +10,21 @@ from PIL import Image
 from keras.models import model_from_json
 import tensorflow as tf
 
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
+# import firebase_admin
+# from firebase_admin import credentials
+# from firebase_admin import firestore
 
 # TODO: Link Lines 18 and 23 with DB Setup on Firebase! 
-creds = credentials.Certificate("flask-app.json")
-firebase_admin.initialize_app(creds)
+# creds = credentials.Certificate("flask-app.json")
+# firebase_admin.initialize_app(creds)
 
-db = firestore.client()
-print("PRINTING USERS")
-users = db.collection(u'ds23_flask')
-docs = users.get()
+# db = firestore.client()
+# print("PRINTING USERS")
+# users = db.collection(u'ds23_flask')
+# docs = users.get()
 
-for doc in docs:
-    print(u'{} -> {}'.format(doc.id, doc.to_dict()))
+# for doc in docs:
+#     print(u'{} -> {}'.format(doc.id, doc.to_dict()))
 
 application = app = Flask(__name__)
 api = Api(app, version='1.0', title='MNIST Classification', description='CNN for Mnist')
