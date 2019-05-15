@@ -1,5 +1,5 @@
 # from keras.preprocessing.image import img_to_array
-from keras.models import load_model
+# from keras.models import load_model
 from flask_restplus import Api, Resource, fields
 from flask import Flask, request, jsonify
 import numpy as np
@@ -7,6 +7,7 @@ from werkzeug.datastructures import FileStorage
 # from PIL import Image
 from keras.models import model_from_json
 import tensorflow as tf
+import pickle
 # # import firebase_admin
 # from firebase_admin import credentials, firestore
 # import datetime
@@ -23,7 +24,8 @@ single_parser = api.parser()
 single_parser.add_argument('file', location='files',
   type=FileStorage, required=True)
 
-model = load_model('my_model.pkl')
+# model = load_model('my_model.pkl')
+model = pickle.load(open("my_model.pkl", "rb"))
 graph = tf.get_default_graph()
 
 @ns.route('/prediction')
@@ -33,12 +35,15 @@ class SVCPrediction(Resource):
     def post(self):
         args = single_parser.parse_args()
         record = args.file
-        record.save("last_record.png")
-        with open("last_record.png") as fr:
-            data = fr.readlines().strip("\n")
+        record.save("last_record.txt")
+        with open("last_record.txt") as fr:
+            data = [fr.read().strip("\n")]
+        print(data[:3])
         with graph.as_default():
             out = model.predict(data)
-        print("Out: ", out)
+        print("Out: ", out[0])
+        pred = str(out[0])
+        return {"Cancer Severity Classification [1-9]: ": pred}
         
 # class CNNPrediction(Resource):
 #   """Uploads your data to the CNN"""
