@@ -2,3 +2,6 @@ my_model.pkl
 .ipynb_checkpoints
 datasets/
 requirements.txt
+venv/
+last_record.txt
+medical-record.txt
